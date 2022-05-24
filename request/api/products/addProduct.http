@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/products
+content-type: application/json
+
+{
+    "title": "Computadora",
+    "price": 1000,
+    "thumbnail": "https://res.cloudinary.com/dnwlad3kp/image/upload/v1637962406/compragamer_Imganen_general_21800_Notebook_ASUS_x509_15_udyq3y.png",
+    "description": "Notebook HP 8GB RAM",
+    "code": "405fth",
+    "stock": 10
+}

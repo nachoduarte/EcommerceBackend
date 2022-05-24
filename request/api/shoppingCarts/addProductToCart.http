@@ -1,0 +1,2 @@
+POST http://localhost:8080/api/shoppingCarts/2/products/2
+content-type: application/json
