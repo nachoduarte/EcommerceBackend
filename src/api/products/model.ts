@@ -1,25 +1,63 @@
-const Contenedor = require('../../store/contenedor.js');
-const productsDB = new Contenedor('products')
+import { productDao } from '../../store/daos'
 
+function addProduct({
+  title,
+  price,
+  thumbnail,
+  description,
+  code,
+  stock,
+  timestamp,
+}) {
+  return productDao.add({
+    title,
+    price,
+    thumbnail,
+    description,
+    code,
+    stock,
+    timestamp,
+  })
+}
 
 function getAllProducts() {
-    return productsDB.getAll();
+  return productDao.getAll()
 }
 
 function getProductById(id) {
-    return productsDB.getById(id);
+  return productDao.getById(id)
+}
+
+function updateProductById({
+  id,
+  title,
+  price,
+  thumbnail,
+  description,
+  code,
+  stock,
+  timestamp,
+}) {
+  return productDao.updateById({
+    id,
+    title,
+    price,
+    thumbnail,
+    description,
+    code,
+    stock,
+    timestamp,
+  })
 }
 
 function deleteProductById(id) {
-    return productsDB.deleteById(id);
+  return productDao.deleteById(id)
 }
 
-function addProduct({ title, price, thumbnail, description, code, stock, timestamp }) {
-    return productsDB.save({ title, price, thumbnail, description, code, stock, timestamp });
+export default {
+  addProduct,
+  getAllProducts,
+  getProductById,
+  updateProductById,
+  deleteProductById,
 }
-
-function updateProductById({ id, title, price, thumbnail, description, code, stock, timestamp }) {
-    return productsDB.updateById({ id, title, price, thumbnail, description, code, stock, timestamp });
-}
-
-export default { addProduct, getAllProducts, updateProductById, deleteProductById, getProductById };
