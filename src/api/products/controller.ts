@@ -1,14 +1,26 @@
 import express from 'express'
 import model from './model'
 import * as response from '../../network/response'
-import { checkAuth } from '../../network/secure'
+import { checkAuth, getUserFromToken } from '../../network/secure'
 
 const router = express.Router()
-router.post('/', checkAuth('admin'), validateProduct, addProduct)
+router.post(
+  '/',
+  getUserFromToken,
+  checkAuth('admin'),
+  validateProduct,
+  addProduct
+)
 router.get('/', getProducts)
 router.get('/:id', getProductById)
-router.put('/:id', checkAuth('admin'), validateProduct, updateProduct)
-router.delete('/:id', checkAuth('admin'), deleteProductById)
+router.put(
+  '/:id',
+  getUserFromToken,
+  checkAuth('admin'),
+  validateProduct,
+  updateProduct
+)
+router.delete('/:id', getUserFromToken, checkAuth('admin'), deleteProductById)
 
 function addProduct(req, res, next) {
   const { error } = req
@@ -16,22 +28,33 @@ function addProduct(req, res, next) {
     return response.error(req, res, error, 400)
   }
   const { title, price, thumbnail, description, code, stock } = req.body
-  model.addProduct({ title, price, thumbnail, description, code, stock, timestamp: Date.now() })
-      .then((productId) => response.success(req, res, { productId }, 201))
-      .catch(next)
+  model
+    .addProduct({
+      title,
+      price,
+      thumbnail,
+      description,
+      code,
+      stock,
+    })
+    .then((productId) => response.success(req, res, { productId }, 201))
+    .catch(next)
 }
-
 
 function getProducts(req, res, next) {
-  model.getAllProducts().then((products) => response.success(req, res, products)).catch(next)
+  model
+    .getAllProducts()
+    .then((products) => response.success(req, res, products))
+    .catch(next)
 }
-
 
 function getProductById(req, res, next) {
   const { id } = req.params
-  model.getProductById(id).then((product) => response.success(req, res, product)).catch(next)
+  model
+    .getProductById(id)
+    .then((product) => response.success(req, res, product))
+    .catch(next)
 }
-
 
 function updateProduct(req, res, next) {
   const { id } = req.params
@@ -40,18 +63,27 @@ function updateProduct(req, res, next) {
     return response.error(req, res, error, 400)
   }
   const { title, price, thumbnail, description, code, stock } = req.body
-  model.updateProductById({ id, title, price, thumbnail, description, code, stock, timestamp: Date.now() })
-        .then((productId) => response.success(req, res, { productId }))
-        .catch(next)
+  model
+    .updateProductById({
+      id,
+      title,
+      price,
+      thumbnail,
+      description,
+      code,
+      stock,
+    })
+    .then((productId) => response.success(req, res, { productId }))
+    .catch(next)
 }
-
 
 function deleteProductById(req, res, next) {
   const { id } = req.params
-  model.deleteProductById(id).then((productId) => response.success(req, res, { productId })).catch(next)
+  model
+    .deleteProductById(id)
+    .then((productId) => response.success(req, res, { productId }))
+    .catch(next)
 }
-
-
 
 function validateProduct(req, res, next) {
   const { title, price, thumbnail, description, code, stock } = req.body

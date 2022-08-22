@@ -1,14 +1,16 @@
 import { ShoppingCart } from '../mongoDb/models/ShoppingCart'
+import { TShoppingCart } from '../types/TShoppingCart'
 
-const add = (obj) => {
-  const shoppingCart = new ShoppingCart(obj)
+const add = (obj: TShoppingCart) => {
+  const shoppingCart = new ShoppingCart<TShoppingCart>(obj)
   return shoppingCart.save()
 }
 
 const getAll = () => ShoppingCart.find()
-const getById = (id) => ShoppingCart.findOne({ _id: id })
-const updateById = (obj) => ShoppingCart.findByIdAndUpdate(obj.id, obj)
-const deleteById = (id) => ShoppingCart.findByIdAndDelete(id)
+const getById = (id: string) => ShoppingCart.findOne({ _id: id })
+const updateById = (obj: TShoppingCart) =>
+  ShoppingCart.findByIdAndUpdate(obj.id, obj)
+const deleteById = (id: string) => ShoppingCart.findByIdAndDelete(id)
 
 export default {
   add,

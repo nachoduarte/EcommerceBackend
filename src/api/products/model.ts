@@ -1,4 +1,5 @@
 import { productDao } from '../../store/daos'
+import { TProduct } from '../../store/types/TProduct'
 
 function addProduct({
   title,
@@ -7,8 +8,7 @@ function addProduct({
   description,
   code,
   stock,
-  timestamp,
-}) {
+}: TProduct) {
   return productDao.add({
     title,
     price,
@@ -16,7 +16,6 @@ function addProduct({
     description,
     code,
     stock,
-    timestamp,
   })
 }
 
@@ -24,7 +23,7 @@ function getAllProducts() {
   return productDao.getAll()
 }
 
-function getProductById(id) {
+function getProductById(id: string) {
   return productDao.getById(id)
 }
 
@@ -37,7 +36,7 @@ function updateProductById({
   code,
   stock,
   timestamp,
-}) {
+}: TProduct) {
   return productDao.updateById({
     id,
     title,
@@ -50,8 +49,12 @@ function updateProductById({
   })
 }
 
-function deleteProductById(id) {
+function deleteProductById(id: string) {
   return productDao.deleteById(id)
+}
+
+function getProductsByIds(ids: string[]) {
+  return productDao.getByIds(ids)
 }
 
 export default {
@@ -60,4 +63,5 @@ export default {
   getProductById,
   updateProductById,
   deleteProductById,
+  getProductsByIds,
 }

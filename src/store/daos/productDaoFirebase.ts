@@ -1,4 +1,4 @@
-import FirebaseContainer from '../firebase/FirebaseContainer.js'
+import FirebaseContainer from '../firebase/FirebaseContainer'
 
 const firebaseContainer = new FirebaseContainer('products')
 
