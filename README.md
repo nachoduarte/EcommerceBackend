@@ -33,7 +33,10 @@ Implementacion de una API para E-commerce
 ## Scripts
 
 ` npm run build ` Genera build del proyecto.
+
 ` npm run start ` Corre build generado del proyecto en modo producción.
+
 ` npm run clean ` Borra el build generado del proyecto.
+
 ` npm run dev ` Corre el proyecto en modo desarrollo.
  
