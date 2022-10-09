@@ -1,43 +1,39 @@
 # EcommerceBackend
 proyecto final para curso de programación backend desarrollado en Nodejs.
 
-## Instalación
+## Acerca del proyecto
 
--para correr la app: `npm run build` 
--dentro de la carpeta generada /dist : `node main.js`
--es necesario para la persistencia de los datos crear los archivos products.txt y shoppingCarts.txt dentro de la carpeta /dist. 
+Implementacion de una API para E-commerce
 
-## Persistencia de archivos en base de datos
-
-El proyecto puede usar File System, Firebase o MongoDB para la persistencia en la base de datos, para utilizar MongoDB o Firebase:
-
-1. Descomente la importacion del archivo de conexión en index.ts del proyecto
-
-```
-
-// import './store/mongoDb/connection' // connect to MongoDB
-// import './store/firebase/connection' // connect to Firebase
-
-import express from 'express'
-// ...
-
-```
-
-2. Cambiar al DAO correspondiente en el archivo index.ts de la ruta  `src/store/daos/index.ts`
-
-```
-
-import productDaoFileSystem from './productDaoFileSystem'
-import shoppingCartDaoFileSystem from './shoppingCartDaoFileSystem'
-// import productDaoMongoDB from './productDaoMongoDB'
-// import shoppingCartDaoMongoDB from './shoppingCartDaoMongoDB'
-// import productDaoFirebase from '../../store/daos/productDaoFirebase'
-
-const productDao = productDaoFileSystem
-const shoppingCartDao = shoppingCartDaoFileSystem
-export { productDao, shoppingCartDao }
+- Manejo de productos a través de la API.
+- Manejo de carrito de compras a través de la API.
+- Manejo de usuarios a través de la API.
+- Manejo de auntenticación de usuarios ( login e implementacion de web tokens ) a traves de la API.
+- Implementacion de servicio de Gmail y Whatsapp para registro de usuario y confirmacion de venta.
+- Persistencia de datos en MongoDB para el modo de producción y persistencia en memoria para el desarrollo.
+- Implementación de variables de entorno permitiendo trabajar en modo cluster.
+- Implementacion de registro de logs con Winston y Morgan.
+- Implementacion de proyecto en capas.
+- Implementación del proyecto en TypeScript.
 
 
-```
+## Recursos ( mas detallado en package.json )
 
-3. Modificar el archivo .env del proyecto con los datos necesarios siguiendo el .env.example
+- Node.js
+- Express
+- TypeScript
+- MongoDB
+- Mongoose
+- Passport
+- Bcrypt
+- Dotenv
+- Twilio
+- Nodemailer
+
+## Scripts
+
+` npm run build ` Genera build del proyecto.
+` npm run start ` Corre build generado del proyecto en modo producción.
+` npm run clean ` Borra el build generado del proyecto.
+` npm run dev ` Corre el proyecto en modo desarrollo.
+ 
